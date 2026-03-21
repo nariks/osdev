@@ -24,5 +24,11 @@ kernel.elf: $(OBJS)
 %.o: %.S
 	$(CC) $(CFLAGS) -c $< -o $@
 
+.PHONY: clean qemu
+
 clean:
 	rm -f $(OBJS) kernel.elf
+
+qemu: kernel.elf
+	qemu-system-riscv64 -machine virt -bios default -kernel kernel.elf \
+	-nographic
