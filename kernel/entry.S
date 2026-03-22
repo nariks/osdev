@@ -2,6 +2,9 @@
 .global _start
 
 _start:
+    csrr t2, mhartid            #t0 = hartID of CPU
+    bnez t2, hang               #halt if hartID is not 0
+
     la sp, _stack_top           #setup stack pointer
 
     la t0, _bss_start           #to = start of bss

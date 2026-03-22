@@ -3,7 +3,7 @@ CC    = $(CROSS)-gcc
 LD    = $(CROSS)-ld
 OBJCOPY = $(CROSS)-objcopy
 
-CFLAGS = -march=rv64imac -mabi=lp64 -mcmodel=medany \
+CFLAGS = -march=rv64imac_zicsr -mabi=lp64 -mcmodel=medany \
          -ffreestanding -nostdlib -nostdinc \
          -Wall -Wextra -g
 
