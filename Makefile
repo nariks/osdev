@@ -7,7 +7,7 @@ CFLAGS = -march=rv64imac_zicsr -mabi=lp64 -mcmodel=medany \
          -ffreestanding -nostdlib -nostdinc \
          -Wall -Wextra -g
 
-SRCS = kernel/entry.S kernel/main.c
+SRCS = kernel/entry.S kernel/main.c kernel/uart.c
 OBJS = $(SRCS:.c=.o)
 OBJS := $(OBJS:.S=.o)
 
