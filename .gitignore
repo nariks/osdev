@@ -4,3 +4,7 @@
 
 #QEMU ouput
 *.log
+
+#FTB diagnotsitcs
+*.dtb
+*.dts
