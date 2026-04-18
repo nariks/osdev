@@ -1,4 +1,7 @@
+#include <stdint.h>
 #include "uart.h"
+
+uint64_t fdt_addr;
 
 void kernel_main(void) {
     

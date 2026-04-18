@@ -4,14 +4,23 @@ LD    = $(CROSS)-ld
 OBJCOPY = $(CROSS)-objcopy
 
 CFLAGS = -march=rv64imac_zicsr -mabi=lp64 -mcmodel=medany \
-         -ffreestanding -nostdlib -nostdinc \
+         -ffreestanding -nostdlib \
          -Wall -Wextra -g
 
-SRCS = kernel/entry.S kernel/main.c kernel/uart.c
+SRCS = kernel/entry.S kernel/main.c kernel/uart.c kernel/fdt.c
 OBJS = $(SRCS:.c=.o)
 OBJS := $(OBJS:.S=.o)
 
-LDFLAGS = -T linker.ld
+#setting qemu as the default dev platform
+PLATFORM ?= qemu
+
+ifeq ($(PLATFORM), vf2)
+	CFLAGS += -DPLATFORM_VF2
+	LDFLAGS += -T linker_vf2.ld
+else
+	CFLAGS += -DPLATFORM_QEMU
+	LDFLAGS += -T linker_qemu.ld
+endif
 
 all: kernel.elf
 

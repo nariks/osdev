@@ -14,6 +14,8 @@ loop:
     addi t0, t0, 8              #inc curr addr by 8
     blt t0, t1, loop            #loop if t0 < t1    
 
+    la t2, fdt_addr
+    sd a1, 0(t2)                #store fdt address into fdt_addr
     call kernel_main            #jump to C kernel
 
 hang:

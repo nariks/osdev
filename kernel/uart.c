@@ -1,12 +1,10 @@
-/* uart.c - UART Driver interface for 16550 
+/* uart.c - UART Driver implementation for 16550 
  * part of osdev kernel project
  * Created: 14-04-2026
  */
 
 #include "uart.h"
-
-/* MMIO address for UART */
-#define UART_BASE 0x10000000
+#include "platform.h"
 
 /*register offsets from base */
 #define THR 0               // Transmit Holding Register, (wr, DLAB = 0)
@@ -28,8 +26,8 @@ static volatile char *uart = (volatile char *) UART_BASE;
 void uart_init(void) {
     
     uart[LCR] = 0x83;       //set DLAB = 1 and 8N1
-    uart[DLL] = 0x01;       //set baud rate low byte DLL = 1
-    uart[DLM] = 0x00;       //set baud rate high byte DLM = 0
+    uart[DLL] = UART_BASE & 0xFF;      //set baud rate low byte DLL = 1
+    uart[DLM] = (UART_BASE >> 8) & 0xFF;       //set baud rate high byte DLM = 0
     uart[LCR] = 0x03;       //set DLAB = 0
     uart[IER] = 0x00;       //disable all interrupts
     uart[FCR] = 0x07;       //enable and clearing both FIFO
