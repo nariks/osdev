@@ -7,6 +7,8 @@ void kernel_main(void) {
     
     uart_init();
     
+    uart_puthex(fdt_addr);
+
     while(1) {
         int input = uart_getc();
         if (input == '\r' || input == '\n')
