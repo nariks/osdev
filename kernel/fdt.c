@@ -10,6 +10,7 @@
 #define MAX_BYTE_64 8
 #define NUM_BITS 8
 
+
 uint32_t fdt32_to_cpu( uint32_t addr32) {
 
     uint32_t byte[MAX_BYTE_32];
@@ -35,4 +36,10 @@ uint64_t fdt64_to_cpu( uint64_t addr64) {
 
     return swapped_addr;
 }
+
+int validate_fdt(uint64_t fdt_addr) {
+    fdt_header *fdt_hdr = (fdt_header *)fdt_addr;
+    return (fdt32_to_cpu(fdt_hdr->magic) == 0xD00DFEED);
+}
+
 
