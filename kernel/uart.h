@@ -21,6 +21,9 @@ void uart_puts(const char *s);
  * Return the char or -1 if error detected */
 int uart_getc(void);
 
-/* takes in a number and displays it in hex format*/
-void uart_puthex(uint64_t num);
+/* takes in a 64 bit number and displays it in hex format*/
+void uart_puthex64(uint64_t num);
+
+/* takes in a 32 bit number and displays it in hex format*/
+void uart_puthex32(uint32_t num);
 #endif

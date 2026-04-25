@@ -20,7 +20,8 @@
 #define LSR_TX_EMPTY        0x20
 #define LSR_RX_READY        0x01
 #define LSR_RX_ERRORS       0x0E
-#define TOP_NIBBLE_SHIFT    60
+#define TOP_NIBBLE_SHIFT64  60
+#define TOP_NIBBLE_SHIFT32  28
 #define NIBBLE_SHIFT        4
 
 static volatile char *uart = (volatile char *) UART_BASE;
@@ -58,12 +59,23 @@ int uart_getc(void) {
        return -1; 
 }
 
-void uart_puthex(uint64_t num) {
+void uart_puthex64(uint64_t num) {
     char hex_digits[] = "0123456789ABCDEF";
     uart_puts("0x");
    
-    for (int i = TOP_NIBBLE_SHIFT; i >= 0; i -= NIBBLE_SHIFT) {
+    for (int i = TOP_NIBBLE_SHIFT64; i >= 0; i -= NIBBLE_SHIFT) {
         uart_putc(hex_digits[(num >> i) & 0xF]);
     }
 
 }
+
+void uart_puthex32(uint32_t num) {
+    char hex_digits[] = "0123456789ABCDEF";
+    uart_puts("0x");
+   
+    for (int i = TOP_NIBBLE_SHIFT32; i >= 0; i -= NIBBLE_SHIFT) {
+        uart_putc(hex_digits[(num >> i) & 0xF]);
+    }
+
+}
+

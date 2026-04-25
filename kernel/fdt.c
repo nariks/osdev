@@ -42,4 +42,3 @@ int validate_fdt(uint64_t fdt_addr) {
     return (fdt32_to_cpu(fdt_hdr->magic) == 0xD00DFEED);
 }
 
-

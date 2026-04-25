@@ -20,19 +20,6 @@ typedef struct fdt_header {
     uint32_t size_dt_struct;
 } fdt_header;
 
-/*3 struct fdt_header {
-  4     uint32_t magic;
-  5     uint32_t struct_offset;
-  6     uint32_t memory_offset;
-  7 };  
-  8 
-  9 fdt_header *fdt_hdr = (fdt_header *)fdt_addr;
- 10 fdt_hdr.magic = fdt32_to_cpu(*fdt_addr);
- 11 fdt_hdr.struct_offset = 
-*/
-
-
-
 
 // converts FDT's 32 bit big endian to CPU's native little endian
 uint32_t fdt32_to_cpu( uint32_t addr32);
@@ -40,6 +27,10 @@ uint32_t fdt32_to_cpu( uint32_t addr32);
 // converts FDT's 64 bit big endian to CPU's native little endian:
 uint64_t fdt64_to_cpu( uint64_t addr64);
 
+//uses the fdt_address from a1 reg and checks the magic field for 0xDOODFEED
 int validate_fdt(uint64_t fdt_addr);
+
+//fn reads the string value stored at (base + offset) address. 
+void read_string(uint64_t base, uint32_t offset);
 #endif
 
