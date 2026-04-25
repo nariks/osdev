@@ -8,7 +8,7 @@ void kernel_main(void) {
     
     uart_init();
 
-    if (validate_fdt(fdt_addr))
+    if (check_fdt_magic(fdt_addr))
         uart_puts("\nValid FDT\n\n");
     else {
         uart_puts("Invalid FDT\n");

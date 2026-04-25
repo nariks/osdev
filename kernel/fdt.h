@@ -22,13 +22,13 @@ typedef struct fdt_header {
 
 
 // converts FDT's 32 bit big endian to CPU's native little endian
-uint32_t fdt32_to_cpu( uint32_t addr32);
+uint32_t fdt32_to_cpu(uint32_t value);
 
 // converts FDT's 64 bit big endian to CPU's native little endian:
-uint64_t fdt64_to_cpu( uint64_t addr64);
+uint64_t fdt64_to_cpu(uint64_t value);
 
-//uses the fdt_address from a1 reg and checks the magic field for 0xDOODFEED
-int validate_fdt(uint64_t fdt_addr);
+//uses the fdt_address from a1 reg and checks the magic field for 0xDDFEED
+int check_fdt_magic(uintptr_t fdt_address);
 
 //fn reads the string value stored at (base + offset) address. 
 void read_string(uint64_t base, uint32_t offset);
